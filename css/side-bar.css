@@ -1,0 +1,51 @@
+body {
+    font-family: "Playfair Display", sans-serif;
+    background-color: #f4f4f4;
+    color: #080d30;
+}
+
+.sidebar {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #141414;
+    overflow-x: hidden;
+    padding-top: 16px;
+    color: #fff7b9;
+}
+
+.sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #b4aa5a;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: #fff7b9;
+}
+.sidebar #userSection{
+    padding: 6px 8px 200px ;
+    font-size: 20px;
+    color: #fff7b9;
+    display: block;
+}
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+    .sidebar a {
+        font-size: 18px;
+    }
+}
