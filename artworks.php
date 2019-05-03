@@ -1,35 +1,29 @@
 <?php
-    $pageTitle='Artworks';
-    require_once('header.php');
+$pageTitle = 'Artworks';
+require_once('header.php');
 ?>
 
 <main class="container">
     <?php
-        require_once ('connectDB.php');
-        $sql="SELECT * FROM artwork";
-        $cmd=$conn->prepare($sql);
-        $cmd->execute();
-        $artworks=$cmd->fetchAll();
-        $conn=null;
+    require_once('connectDB.php');
+    $sql = "SELECT * FROM artwork";
+    $cmd = $conn->prepare($sql);
+    $cmd->execute();
+    $artworks = $cmd->fetchAll();
+    $conn = null;
 
-        echo '<table class="table table-striped table-hover">
-            <tr><th>Image</th>
-                <th>Technique</th>
-                <th>Description</th> 
-            </tr>';
-        foreach($artworks as $artwork){
-            echo'<tr>
-                <td><img height="200" src='.$artwork['image'].'></td>
-                <td>'. $artwork['technique'] .'</td>
-                <td>'. $artwork['description'] .'</td></tr>';
-
+    echo '<div class="row">';
+        foreach ($artworks as $artwork) {
+            echo '<div class="column">
+             <div class="content">
+            <img height="350" src=' . $artwork['image'] . ' style="width:100%">
+             <a href="artworkInfo.php?id_artwork='. $artwork['id_artwork'].' "> <h4>'.$artwork['title'].'</h4></a>
+            <p>'.$artwork['author'].'</p>
+            </div></div> ';
         }
-
-
-        echo '</table>';
-
-    ?>
+    echo '</div>';
+?>
 
 </main>
 
-<?php require_once ('footer.php'); ?>
+<?php require_once('footer.php'); ?>

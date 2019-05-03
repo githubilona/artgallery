@@ -1,7 +1,13 @@
 <?php
+$title=$_POST['title'];
+$author=$_POST['author'];
+$dateMade=$_POST['dateMade'];
+$technique=$_POST['technique'];
+$colors=$_POST['colors'];
+$width=$_POST['width'];
+$height=$_POST['height'];
+$description=$_POST['description'];
 
- $description=$_POST['description'];
- $technique=$_POST['technique'];
 $imageName = $_FILES['image']['name'];
 $imageType = $_FILES['image']['type'];
 $imageTmpLocation = $_FILES['image']['tmp_name'];
@@ -23,12 +29,21 @@ if (empty($imageName)){
 
 require_once('connectDB.php');
 
-$sql="INSERT INTO artwork (image, description, technique) VALUES (:image, :description, :technique)";
+$sql="INSERT INTO artwork (title, author, date_made, technique, colors, width, height, description, image) VALUES 
+(:title, :author, :dateMade, :technique, :colors, :width, :height, :description, :image)";
 
 $cmd= $conn->prepare($sql);
-$cmd->bindParam(':image', $fileName, PDO::PARAM_STR,255);
-$cmd->bindParam(':description', $description, PDO::PARAM_STR,30);
+$cmd->bindParam(':title', $title, PDO::PARAM_STR,45);
+$cmd->bindParam(':author', $author, PDO::PARAM_STR,45);
+$cmd->bindParam(':dateMade', $dateMade, PDO::PARAM_STR,45);
 $cmd->bindParam(':technique', $technique, PDO::PARAM_STR,30);
+$cmd->bindParam(':colors', $colors, PDO::PARAM_STR,100);
+$cmd->bindParam(':width', $width, PDO::PARAM_STR,10);
+$cmd->bindParam(':height', $height, PDO::PARAM_STR,10);
+$cmd->bindParam(':description', $description, PDO::PARAM_STR);
+$cmd->bindParam(':image', $fileName, PDO::PARAM_STR,255);
+
+
 
 $cmd->execute();
 $conn=null;
