@@ -24,8 +24,6 @@
 
 <div class="sidebar">
 
-
-
     <?php
     session_start();
     if (!empty($_SESSION['email'])) {
@@ -53,6 +51,7 @@
     <a href="artworks.php"><i class="fas fa-palette"></i></i> Artworks</a>
     <a href="artists.php"><i class="far fa-circle"></i></i> Artists</a>
     <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>'
+
 
 
 

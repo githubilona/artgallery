@@ -22,6 +22,7 @@
             <input name="title" id="title" required placeholder="Title"/>
         </fieldset>
 
+
         <fieldset class="form-group">
             <label for="author" class="col-sm-2">Author</label>
             <input name="author" id="author" required placeholder="Author"/>

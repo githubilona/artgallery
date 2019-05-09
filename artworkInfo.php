@@ -16,26 +16,32 @@ require_once('header.php');
     $cmd = $conn->prepare($sql);
     $cmd->bindParam(':id_artwork', $id_artwork, PDO::PARAM_INT);
     $cmd->execute();
-    $artworkRow = $cmd->fetchAll();
-    foreach ($artworkRow as $artworkColumn) {
-    }
+    $artworkRow = $cmd->fetch();
+
+
+    $sqlArtist = "SELECT * FROM artist NATURAL JOIN artwork WHERE id_artwork=$id_artwork";
+    $cmd = $conn->prepare($sqlArtist);
+    $cmd->bindParam(':id_artwork', $id_artwork, PDO::PARAM_INT);
+    $cmd->execute();
+    $artist = $cmd->fetch();
+
 
     $conn = null;
 
     ?>
 
     <div class="img-magnifier-container">
-        <?php echo '<img id="myimage" src="' . $artworkColumn['image'] . '" width="600" height="600 ">'; ?>
+        <?php echo '<img id="myimage" src="' . $artworkRow['image'] . '" width="600" height="600 ">'; ?>
     </div>
     <div id="info">
         <div id="title">
-            <?php echo '<h2>'. $artworkColumn['title'] . '</h2>
-                        <h4>'. $artworkColumn['author']. '</h4></p>';
+            <?php echo '<h2>'. $artworkRow['title'] . '</h2>
+                        <h4><a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'].'  '. $artist['last_name'] . '</a></h4></p>';
 
             ?>
         </div>
         <div id="description">
-            <?php echo $artworkColumn['description']; ?>
+            <?php echo $artworkRow['description']; ?>
         </div>
     </div>
 

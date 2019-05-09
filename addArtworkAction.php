@@ -29,12 +29,48 @@ if (empty($imageName)){
 
 require_once('connectDB.php');
 
-$sql="INSERT INTO artwork (title, author, date_made, technique, colors, width, height, description, image) VALUES 
-(:title, :author, :dateMade, :technique, :colors, :width, :height, :description, :image)";
+$name = explode(" ",$author);
+//if(!empty($firstName))
+$firstName=$name[0];
+$lastName=$name[1];
+$sqlGetArtist="SELECT id_artist FROM artist where first_name=:firstName && last_name=:lastName";
+$cmd = $conn->prepare($sqlGetArtist);
+$cmd->bindParam(':firstName', $firstName, PDO::PARAM_STR,45);
+$cmd->bindParam(':lastName', $lastName, PDO::PARAM_STR,45);
+$cmd->execute();
+$artists =$cmd->fetchAll();
+foreach ($artists as $artist){
+    echo 'id Artist            ' . $artist['id_artist'];
+}
+
+// if artist wasn't found, insert new record into database
+$idArtist=$artist['id_artist'];
+if ($idArtist == null){
+
+    $sqlAddArtist ="INSERT INTO artist (first_name, last_name) VALUES (:firstName, :lastName)";
+    $cmd= $conn->prepare($sqlAddArtist);
+    $cmd->bindParam(':firstName', $firstName, PDO::PARAM_STR,45);
+    $cmd->bindParam(':lastName', $lastName, PDO::PARAM_STR,45);
+    $cmd->execute();
+
+    $sqlGetArtist="SELECT id_artist FROM artist where first_name=:firstName AND last_name=:lastName";
+    $cmd = $conn->prepare($sqlGetArtist);
+    $cmd->bindParam(':firstName', $firstName, PDO::PARAM_STR,45);
+    $cmd->bindParam(':lastName', $lastName, PDO::PARAM_STR,45);
+    $cmd->execute();
+    // to get only one row use fetch
+    $artist =$cmd->fetch();
+
+    $idArtist=$artist['id_artist'];
+}
+
+$sql="INSERT INTO artwork (id_artist, title, date_made, technique, colors, width, height, description, image) VALUES 
+(:idArtist, :title, :dateMade, :technique, :colors, :width, :height, :description, :image)";
 
 $cmd= $conn->prepare($sql);
+$cmd->bindParam(':idArtist', $idArtist, PDO::PARAM_STR,10);
 $cmd->bindParam(':title', $title, PDO::PARAM_STR,45);
-$cmd->bindParam(':author', $author, PDO::PARAM_STR,45);
+//$cmd->bindParam(':author', $author, PDO::PARAM_STR,45);
 $cmd->bindParam(':dateMade', $dateMade, PDO::PARAM_STR,45);
 $cmd->bindParam(':technique', $technique, PDO::PARAM_STR,30);
 $cmd->bindParam(':colors', $colors, PDO::PARAM_STR,100);
@@ -48,6 +84,6 @@ $cmd->bindParam(':image', $fileName, PDO::PARAM_STR,255);
 $cmd->execute();
 $conn=null;
 
-header('location:artworks.php');
+// header('location:artworks.php');
 
 ?>
