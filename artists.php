@@ -9,7 +9,7 @@
     require_once('connectDB.php');
 
     // create a SQL query
-    $sql = "SELECT * FROM artists";
+    $sql = "SELECT * FROM artist";
 
     // prepare and execute the sql command
     $cmd = $conn->prepare($sql);
@@ -29,10 +29,10 @@
     </tr>';
 
     foreach ($artists as $artist){
-        echo '<tr><td>'. $artist['firstName']. '</td>
-                  <td>'. $artist['lastName']. '</td>
-                  <td>'. $artist['birthDate']. '</td>
-              </tr>';
+        echo '<tr><td><a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'] . '</a></td>
+                  <td>'. $artist['last_name']. '</td>
+                  <td>'. $artist['information']. '</td>
+              </a></tr>';
     }
 
 

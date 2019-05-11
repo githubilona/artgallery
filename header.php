@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/side-bar.css">
     <link rel="stylesheet" href="css/artworks.css">
     <link rel="stylesheet" href="css/magnifier-glass.css">
+    <link rel="stylesheet" href="css/exhibitions.css">
 
 
 </head>
@@ -32,6 +33,7 @@
         echo '<div id="userSection">
         '.$_SESSION['email'].'
         <a href="addArtwork.php"><i class="far fa-circle"></i></i> Add Artwork</a>
+        <a href="addExhibition.php"><i class="fas fa-circle"></i></i></i> Organize an exhibition</a>
         <a href="#contact"><i class="fas fa-user-circle"></i></i></i> My account</a>
         <a href="logout.php"><i class="fas fa-power-off"></i></i> Logout</a>
         </div>';
@@ -50,6 +52,7 @@
     <a href="artworks.php"><i class="fa fa-fw fa-home"></i> Home</a>
     <a href="artworks.php"><i class="fas fa-palette"></i></i> Artworks</a>
     <a href="artists.php"><i class="far fa-circle"></i></i> Artists</a>
+    <a href="exhibitions.php"><i class="far fa-circle"></i></i> Exhibitions</a>
     <a href="#contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>'
 
 
