@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/artworks.css">
     <link rel="stylesheet" href="css/magnifier-glass.css">
     <link rel="stylesheet" href="css/exhibitions.css">
+    <link rel="stylesheet" href="css/image-gallery.css">
+
 
 
 </head>

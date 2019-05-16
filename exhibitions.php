@@ -16,7 +16,8 @@ require_once('header.php');
                 <div class="cardExhibition">
                    <div id="imageExhibition"> <img src="' . $exhibition['image'] . '" alt="image" style="width:100%"></div>
                     <div class="infoExhibition">
-                        <h2>' . $exhibition['subject'] . '</h2>
+                        <h2><a href="exhibitionInfo.php?id_exhibition='.$exhibition['id_exhibition'].'">'
+                        . $exhibition['subject'] . '</a></h2>
                         <p class="title">CEO & Founder</p>
                         <p>' . $exhibition['description'] . '</p>
                         <p>' . $exhibition['start_date'] . '   ' . $exhibition['end_date'] . '</p>

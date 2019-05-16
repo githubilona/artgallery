@@ -30,7 +30,7 @@ if (empty($imageName)){
 require_once('connectDB.php');
 
 $name = explode(" ",$author);
-//if(!empty($firstName))
+//if(!empty($firstName))  // TODO and first name and last name fields insted od one field - author
 $firstName=$name[0];
 $lastName=$name[1];
 $sqlGetArtist="SELECT id_artist FROM artist where first_name=:firstName && last_name=:lastName";

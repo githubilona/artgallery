@@ -62,7 +62,7 @@ if ($ok)
             exit();
         }
         else
-        {
+        { // TODO  !!!!!!!!!!!!!!!
             $to = 'jaret.wright@georgiancollege.ca';
             $subject = 'error on registration page';
             $message = 'email: '.$email.' username: '.$userName.' password: '.$password
