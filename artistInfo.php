@@ -2,6 +2,7 @@
 $pageTitle = "Artist Info";
 require_once('header.php');
 ?>
+<link rel="stylesheet" href="css/artist-info.css">
 <main class="container">
 
     <?php
@@ -13,7 +14,7 @@ require_once('header.php');
     $cmd->bindParam(':id_artist', $artistID, PDO::PARAM_INT);
     $cmd->execute();
     $artist= $cmd->fetch();
-    echo $artist['first_name'] . ' ' . $artist['last_name'] . ' ' . $artist['information'];
+
 
     $sql = "SELECT * FROM artwork NATURAL JOIN artist WHERE id_artist=:id_artist";
     $cmd = $conn->prepare($sql);
@@ -21,10 +22,7 @@ require_once('header.php');
     $cmd->execute();
     $results = $cmd->fetchAll();
 
-    foreach ($results as $result){
-         echo '<img src=" '.$result['image'].' " />';
 
-    }
     // imie nazwisko autora, informacje o autorze, obrazy autora , zdjecie (opcjonalnie), styl prac (farba, olowek)
     // tematyka
 
@@ -37,9 +35,26 @@ require_once('header.php');
             $artist = $cmd->fetch();
         */
 
-    $conn = null;
+
 
     ?>
+    <div id="container">
+        <div id="text">
+            <?php echo
+                '<h3>'.$artist['first_name'] . ' ' . $artist['last_name'] . ' <br>' . $artist['information']. '</h3>';
+
+            ?>
+        </div>
+        <div id="image">
+            <?php
+            foreach ($results as $result){
+                echo '<img src=" '.$result['image'].' " style="float:left" width="300px" height="300px"/>';
+
+            }
+            ?>
+        </div>
+    </div>
 
 </main>
+<?php  $conn = null;?>
 <?php require_once('footer.php') ?>

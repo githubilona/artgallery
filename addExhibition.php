@@ -28,7 +28,7 @@ require_once('header.php');
             <fieldset class="form-group">
                 <label for="files" class="col-sm-2">Select multiple files: </label>
                 <input id="files" type="file" multiple  name="images1[]" oninput="this.className = ''"/>
-                <output id="result"/>
+                <output id="result" style="float: left"/><div id="artworkForm"></div>
             </fieldset>
         </div>
 
@@ -125,11 +125,21 @@ require_once('header.php');
                         var picFile = event.target;
 
                         var div = document.createElement("div");
+                        var div2 = document.createElement("div2");
+
 
                         div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                            "title='" + picFile.name + "'/>";
+                            "title='" + picFile.name + "'/><br><br>";
+
+                        div2.innerHTML = "<input type='text'><br>" +
+                            "<input type='text'<br><br>";
 
                         output.insertBefore(div, null);
+
+                        // TODO add form for each image
+                   //     output.insertBefore(div2, null);
+                   //     document.getElementById("artworkResult").appendChild(div2);
+
 
                     });
 

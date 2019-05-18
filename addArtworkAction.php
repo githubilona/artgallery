@@ -1,6 +1,7 @@
 <?php
 $title=$_POST['title'];
-$author=$_POST['author'];
+$firstName=$_POST['firstName'];
+$lastName=$_POST['lastName'];
 $dateMade=$_POST['dateMade'];
 $technique=$_POST['technique'];
 $colors=$_POST['colors'];
@@ -28,11 +29,11 @@ if (empty($imageName)){
 }
 
 require_once('connectDB.php');
-
+/*
 $name = explode(" ",$author);
 //if(!empty($firstName))  // TODO and first name and last name fields insted od one field - author
 $firstName=$name[0];
-$lastName=$name[1];
+$lastName=$name[1]; */
 $sqlGetArtist="SELECT id_artist FROM artist where first_name=:firstName && last_name=:lastName";
 $cmd = $conn->prepare($sqlGetArtist);
 $cmd->bindParam(':firstName', $firstName, PDO::PARAM_STR,45);

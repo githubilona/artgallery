@@ -3,6 +3,7 @@
     $pageTitle = 'Artists';
     require_once('header.php');
 ?>
+<link rel="stylesheet" href="css/artists.css">
 <main class="container">
 <?php
     // connect to the DB
@@ -21,19 +22,16 @@
     // close the DB connection
     $conn=null;
 
-    // display the result in a table
-    echo '<table class="table table-striped table-hover"><tr>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Birth date</th>
-    </tr>';
+
 
     foreach ($artists as $artist){
-        echo '<tr><td><a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'] . '</a></td>
-                  <td>'. $artist['last_name']. '</td>
-                  <td>'. $artist['information']. '</td>
-              </a></tr>';
+        echo '
+            <div id="box">
+               <a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'] .' '. $artist['last_name'].'</a>
+            </div>
+        ';
     }
+
 
 
 ?>

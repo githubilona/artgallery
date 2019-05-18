@@ -1,3 +1,6 @@
+.container{
+    padding-top: 30px;
+}
 body {
     font-family: "Playfair Display", sans-serif;
     background-color: #e5e5e5;
@@ -27,6 +30,7 @@ body {
 
 .sidebar a:hover {
     color: #fff7b9;
+    transition: 0.3s;
 }
 .sidebar #userSection{
     padding: 6px 8px 200px ;

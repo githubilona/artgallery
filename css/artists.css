@@ -1,0 +1,28 @@
+#box{
+    font-size: 22px;
+    float:left;
+    width: 25%;
+    height: 20%;
+    margin: 10px;
+    border-left: #a29951 3px solid ;
+    border-radius: 3%;
+}
+
+#box:hover{
+
+    transition: 0.3s;
+    border: #a29951 3px solid ;
+}
+a {
+    padding: 6px 8px 6px 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #7b7b7b;
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000000;
+
+}

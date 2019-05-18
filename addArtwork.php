@@ -22,11 +22,17 @@
             <input name="title" id="title" required placeholder="Title"/>
         </fieldset>
 
+        <fieldset class="form-group">
+            <label for="firstName" class="col-sm-2">First Name</label>
+            <input name="firstName" id="firstName" required placeholder="First Name"/>
+        </fieldset>
 
         <fieldset class="form-group">
-            <label for="author" class="col-sm-2">Author</label>
-            <input name="author" id="author" required placeholder="Author"/>
+            <label for="lastName" class="col-sm-2">Last Name</label>
+            <input name="lastName" id="lastName" required placeholder="Last Name"/>
         </fieldset>
+
+
 
         <fieldset class="form-group">
             <label for="dateMade" class="col-sm-2">Date made</label>
