@@ -2,22 +2,24 @@
     font-size: 22px;
     float:left;
     width: 25%;
-    height: 20%;
+    height: 50px;
     margin: 10px;
-    border-left: #a29951 3px solid ;
-    border-radius: 3%;
+
+
+    border-bottom: #a29951 2px solid ;
 }
 
 #box:hover{
 
     transition: 0.3s;
-    border: #a29951 3px solid ;
+    font-weight: bold;
+    border-left: #a29951 15px solid  ;
 }
 a {
     padding: 6px 8px 6px 30px;
     text-decoration: none;
     font-size: 20px;
-    color: #7b7b7b;
+    color: #3f3f3f;
     display: block;
 }
 

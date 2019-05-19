@@ -2,13 +2,8 @@
 $pageTitle = 'Artwork info';
 require_once('header.php');
 ?>
+
 <main class="container">
-
-
-    <h1>Image Magnifier Glass</h1>
-
-    <p>Mouse over the image:</p>
-
     <?php
     $id_artwork = $_GET['id_artwork'];
     require_once('connectDB.php');
@@ -36,12 +31,21 @@ require_once('header.php');
     <div id="info">
         <div id="title">
             <?php echo '<h2>'. $artworkRow['title'] . '</h2>
-                        <h4><a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'].'  '. $artist['last_name'] . '</a></h4></p>';
+                        <h4><a href="artistInfo.php?id_artist='.$artist['id_artist'].'">'. $artist['first_name'].'  '. $artist['last_name'] . '</a></h4>    
+                        ';
 
             ?>
         </div>
         <div id="description">
-            <?php echo $artworkRow['description']; ?>
+            <?php echo $artworkRow['description']; ?> <br><br><br>
+            <?php echo '<p><b>Width:</b> '.$artworkRow['width'] . ' cm <br>
+                <b>Height: </b>'.$artworkRow['height'].' cm<br>
+                <b>Technique:</b> '.$artworkRow['technique'].'<br>
+                <b>Colors:</b> '.$artworkRow['colors'].'<br>
+                <b>Date made: </b>'.$artworkRow['date_made'].'<br>
+
+            </p><br>'; ?>
+
         </div>
     </div>
 

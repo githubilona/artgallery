@@ -3,14 +3,37 @@ $pageTitle = 'Artworks';
 require_once('header.php');
 ?>
 
+
 <main class="container">
+
+
     <?php
-    require_once('connectDB.php');
+
+    if (!empty($_GET['searchTerms']))
+        $searchTerms = $_GET['searchTerms'];
+    else
+        $searchTerms = null;
+    ?>
+
+    <form action="artworks.php" class="formSpace form-inline">
+        <div class="form-group">
+            <input class="form-control" name="searchTerms" id="searchTerms"
+                   value="<?php echo $searchTerms ?>"/>
+        </div>
+        <button class="btn btn-default">Search</button>
+    </form>
+    <br />
+
+
+    <?php
+    require_once ('searchArtwork.php');
+
+    /*require_once('connectDB.php');
     $sqlArtwork = "SELECT * FROM artwork";
     $cmd = $conn->prepare($sqlArtwork);
     $cmd->execute();
     $artworks = $cmd->fetchAll();
-
+*/
 
     echo '<div class="row">';
         foreach ($artworks as $artwork) {

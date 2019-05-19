@@ -20,8 +20,14 @@ require_once('header.php');
     $cmd = $conn->prepare($sql);
     $cmd->bindParam(':id_artist', $artistID, PDO::PARAM_INT);
     $cmd->execute();
-    $results = $cmd->fetchAll();
+    $artwork = $cmd->fetchAll();
 
+
+    $sql = "SELECT * FROM artwork NATURAL JOIN artist WHERE id_artist=:id_artist";
+    $cmd = $conn->prepare($sql);
+    $cmd->bindParam(':id_artist', $artistID, PDO::PARAM_INT);
+    $cmd->execute();
+    $results = $cmd->fetchAll();
 
     // imie nazwisko autora, informacje o autorze, obrazy autora , zdjecie (opcjonalnie), styl prac (farba, olowek)
     // tematyka
@@ -41,7 +47,8 @@ require_once('header.php');
     <div id="container">
         <div id="text">
             <?php echo
-                '<h3>'.$artist['first_name'] . ' ' . $artist['last_name'] . ' <br>' . $artist['information']. '</h3>';
+                '<h3>'.$artist['first_name'] . ' ' . $artist['last_name'] . ' <br>' . $artist['information']. '</h3>
+                <p>'.$artwork.'</p>';
 
             ?>
         </div>

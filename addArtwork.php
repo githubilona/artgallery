@@ -2,9 +2,10 @@
     $pageTitle="Add artwork";
     require_once ('header.php');
 ?>
-<main class="container">
+<link rel="stylesheet" href="css/add-artwork.css">
+<div class="container">
     <h1>Add artwork</h1>
-
+<div  id="form">
     <!-- To have file input send properly I had to add enctype="multipart/form-data" 01.05.19 -->
     <form method="post" action="addArtworkAction.php" enctype="multipart/form-data">
 
@@ -12,10 +13,6 @@
             <label for="image" class="col-sm-2">Image</label>
             <input name="image" id="image" type="file" onchange="readURL(this);" />
         </fieldset>
-
-        <div id="imagePreview">
-            <img id="blah" src="#" alt="your image" />
-        </div>
 
         <fieldset class="form-group">
             <label for="title" class="col-sm-2">Title</label>
@@ -69,6 +66,10 @@
 
 
     </form>
+</div>
+    <div id="imagePreview">
+        <img id="img" src="#" alt="your image" />
+    </div>
 </main>
 
 <?php require_once ('footer.php'); ?>
@@ -78,7 +79,7 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#blah')
+                $('#img')
                     .attr('src', e.target.result)
                     .width(150)
                     .height(200);
