@@ -1,5 +1,6 @@
 <?php
 $title=$_POST['title'];
+$price=$_POST['price'];
 $firstName=$_POST['firstName'];
 $lastName=$_POST['lastName'];
 $dateMade=$_POST['dateMade'];
@@ -12,6 +13,7 @@ $description=$_POST['description'];
 $imageName = $_FILES['image']['name'];
 $imageType = $_FILES['image']['type'];
 $imageTmpLocation = $_FILES['image']['tmp_name'];
+
 
 if (empty($imageName)){
     echo 'bla';
@@ -65,12 +67,13 @@ if ($idArtist == null){
     $idArtist=$artist['id_artist'];
 }
 
-$sql="INSERT INTO artwork (id_artist, title, date_made, technique, colors, width, height, description, image) VALUES 
-(:idArtist, :title, :dateMade, :technique, :colors, :width, :height, :description, :image)";
+$sql="INSERT INTO artwork (id_artist, title, price, date_made, technique, colors, width, height, description, image) VALUES 
+(:idArtist, :title, :price, :dateMade, :technique, :colors, :width, :height, :description, :image)";
 
 $cmd= $conn->prepare($sql);
 $cmd->bindParam(':idArtist', $idArtist, PDO::PARAM_STR,10);
 $cmd->bindParam(':title', $title, PDO::PARAM_STR,45);
+$cmd->bindParam(':price', $price, PDO::PARAM_STR,45);
 //$cmd->bindParam(':author', $author, PDO::PARAM_STR,45);
 $cmd->bindParam(':dateMade', $dateMade, PDO::PARAM_STR,45);
 $cmd->bindParam(':technique', $technique, PDO::PARAM_STR,30);

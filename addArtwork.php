@@ -15,7 +15,7 @@
         </fieldset>
 
         <fieldset class="form-group">
-            <label for="title" class="col-sm-2">Title</label>
+            <label for="title" class="col-sm-2">Title *</label>
             <input name="title" id="title" required placeholder="Title"/>
         </fieldset>
 
@@ -29,16 +29,19 @@
             <input name="lastName" id="lastName" required placeholder="Last Name"/>
         </fieldset>
 
-
-
         <fieldset class="form-group">
-            <label for="dateMade" class="col-sm-2">Date made</label>
-            <input name="dateMade" id="dateMade" required placeholder="Date made"/>
+            <label for="dateMade" class="col-sm-2">Year made</label>
+            <input type="number" name="dateMade" id="dateMade" required placeholder="Year made" min="0"/>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="technique" class="col-sm-2">Technique</label>
             <input name="technique" id="technique" required placeholder="Technique"/>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="price" class="col-sm-2">Price</label>
+            <input type="number" name="price" id="price"  placeholder="Price"/>
         </fieldset>
 
         <fieldset class="form-group">
@@ -48,17 +51,17 @@
 
         <fieldset class="form-group">
             <label for="width" class="col-sm-2">Width</label>
-            <input name="width" id="width" required placeholder="Width"/>
+            <input type="number" name="width" id="width" required placeholder="Width"/>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="height" class="col-sm-2">Height</label>
-            <input name="height" id="height" required placeholder="Height"/>
+            <input type="number" name="height" id="height" required placeholder="Height"/>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="description" class="col-sm-2">Description</label>
-            <textarea rows="8" cols="80" name="description" placeholder="Enter description..."></textarea>
+            <textarea rows="8" cols="60" name="description" placeholder="Enter description..."></textarea>
         </fieldset>
 
         <button class="btn btn-default col-sm-offset-2">Save</button>
@@ -71,6 +74,7 @@
         <img id="img" src="#" alt="your image" />
     </div>
 </main>
+</div>
 
 <?php require_once ('footer.php'); ?>
 <script>

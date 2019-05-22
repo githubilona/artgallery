@@ -63,7 +63,7 @@ require_once('header.php');
         <div class="containerSlideshow split right">
 
             <?php
-            $sql = "SELECT * FROM artwork WHERE id_exhibition=:id_exhibition";
+            $sql = "SELECT * FROM exhibition_images WHERE id_exhibition=:id_exhibition";
             $cmd = $conn->prepare($sql);
             $cmd->bindParam(':id_exhibition', $id_exhibition, PDO::PARAM_INT);
             $cmd->execute();

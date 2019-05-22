@@ -20,7 +20,7 @@
         $wordCounter = 0;
 
         foreach ($searchTerms as $searchTerm) {
-            $sql .= " first_name LIKE ? OR last_name LIKE ? OR information LIKE ? ";
+            $sql .= " first_name LIKE ? OR last_name LIKE ? ";
             $searchTerms[$wordCounter] = "%" . $searchTerm . "%";
             $wordCounter++;
 
@@ -28,14 +28,14 @@
                 $sql .= " OR ";
         }
 
-
+        $sql .="ORDER BY first_name";
         //duplicate the search terms so that at run time, there are
         //enough tokens for the ?'s in the sql statement
         $sqlSearchTerms = array();
         foreach ($searchTerms as $searchTerm) {
             $sqlSearchTerms[] = $searchTerm;
             $sqlSearchTerms[] = $searchTerm;
-            $sqlSearchTerms[] = $searchTerm;
+          //  $sqlSearchTerms[] = $searchTerm;
         }
     }
 

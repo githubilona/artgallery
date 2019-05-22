@@ -53,7 +53,7 @@ for ($x = 0; $x < count($_FILES['images1']['tmp_name']); $x++) {
         $imageName = "img/" . 'test' . $file_name;
         move_uploaded_file($sumber, $imageName);
 
-        $sql2 = "insert into image (image) values ('$imageName')";
+        $sql2 = "insert into exhibition_images (image) values ('$imageName')";
         $cmd = $conn->prepare($sql2);
         $cmd->execute();
         // $artists =$cmd->fetchAll();
@@ -126,12 +126,12 @@ for ($x = 0; $x < count($_FILES['images1']['tmp_name']); $x++) {
         $imageName = "img/" . 'test' . $file_name;
         move_uploaded_file($sumber, $imageName);
 
-        $sql = "insert into image (image) values ('$imageName')";
+        $sql = "insert into exhibition_images (id_exhibition, image) values ('$exhibitionID','$imageName')";
 
         $sql2="INSERT INTO artwork (id_artist, id_exhibition, title, date_made, technique, colors, width, height, description, image) VALUES 
 (null,'$exhibitionID',null , null, null, null, null, null, null, '$imageName')";
 
-        $cmd = $conn->prepare($sql2);
+        $cmd = $conn->prepare($sql);
         $cmd->execute();
         // $artists =$cmd->fetchAll();
         // mysqli_query($koneksi, $sql);

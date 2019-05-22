@@ -40,6 +40,13 @@
         <a href="logout.php"><i class="fas fa-power-off"></i></i> Logout</a>
         </div>';
 
+        $adminEmail='admin@admin.pl';
+        if($_SESSION['email'] == $adminEmail ){
+            echo 'admin eamil';
+            echo '<div id="adminSection">
+                    <a href="users.php"><i class="far fa-circle"></i></i>Manage users</a>
+                  </div>';
+        }
 
         //add the user name to the navigation bar
        // echo '<li><div class="navbar-text pull-right">' . $_SESSION['userName'] . '</div></li>';

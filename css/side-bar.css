@@ -37,8 +37,20 @@ body {
     font-size: 20px;
     color: #fff7b9;
     display: block;
+
 }
 
+.sidebar #adminSection a{
+    padding: 6px 8px ;
+    font-size: 16px;
+    color: #ffdaf0;
+    display: block;
+}
+
+.sidebar #adminSection a:hover {
+    color: #ffeefb;
+    transition: 0.3s;
+}
 .main {
     margin-left: 160px; /* Same as the width of the sidenav */
     padding: 0px 10px;

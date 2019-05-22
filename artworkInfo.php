@@ -38,11 +38,12 @@ require_once('header.php');
         </div>
         <div id="description">
             <?php echo $artworkRow['description']; ?> <br><br><br>
-            <?php echo '<p><b>Width:</b> '.$artworkRow['width'] . ' cm <br>
+            <?php echo '<p><b>Price:</b> '.$artworkRow['price'] . '  <br>
+                <b>Height: </b>'.$artworkRow['width'].' cm<br>
                 <b>Height: </b>'.$artworkRow['height'].' cm<br>
                 <b>Technique:</b> '.$artworkRow['technique'].'<br>
                 <b>Colors:</b> '.$artworkRow['colors'].'<br>
-                <b>Date made: </b>'.$artworkRow['date_made'].'<br>
+                <b>Year made: </b>'.$artworkRow['date_made'].'<br>
 
             </p><br>'; ?>
 
