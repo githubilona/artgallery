@@ -30,23 +30,22 @@
     <?php
     session_start();
     if (!empty($_SESSION['email'])) {
-
+        echo '<h4 style="margin-left:8%">'.$_SESSION['email'].'</h4>';
+        $adminEmail='admin@admin.pl';
+        if($_SESSION['email'] == $adminEmail ){
+            echo '<div id="adminSection">
+                    <a href="users.php"><i class="fas fa-circle"></i></i>Users</a>
+                    <a href="adminArtworks.php"><i class="far fa-circle"></i></i>Artworks</a>
+                    <a href="adminExhibitions.php"><i class="fas fa-circle"></i></i>Exhibitions</a>
+                  </div>';
+        }
 
         echo '<div id="userSection">
-        '.$_SESSION['email'].'
         <a href="addArtwork.php"><i class="far fa-circle"></i></i> Add Artwork</a>
         <a href="addExhibition.php"><i class="fas fa-circle"></i></i></i> Organize an exhibition</a>
         <a href="#contact"><i class="fas fa-user-circle"></i></i></i> My account</a>
         <a href="logout.php"><i class="fas fa-power-off"></i></i> Logout</a>
         </div>';
-
-        $adminEmail='admin@admin.pl';
-        if($_SESSION['email'] == $adminEmail ){
-            echo 'admin eamil';
-            echo '<div id="adminSection">
-                    <a href="users.php"><i class="far fa-circle"></i></i>Manage users</a>
-                  </div>';
-        }
 
         //add the user name to the navigation bar
        // echo '<li><div class="navbar-text pull-right">' . $_SESSION['userName'] . '</div></li>';

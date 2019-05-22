@@ -5,6 +5,56 @@ require_once('header.php');
 <link rel="stylesheet" href="css/add-exhibition-form.css">
 <link rel="stylesheet" href="css/image-selection.css">
 
+
+<?php
+if (!empty($_GET['id_exhibition'])){
+    $exhibitionID = $_GET['id_exhibition'];
+}
+else {
+    $exhibitionID = null;
+}
+//id_exhibition, id_address, subject, description, start_date, end_date, image
+$subject=null;
+$description=null;
+$startDate=null;
+$endDate=null;
+$image = null;
+$country= null;
+$city= null;
+$street= null;
+$home_number= null;
+$flat_number= null;
+$post_code= null;
+
+// if the albumID exists, it is an edit situation and we need to
+//load the album from the DB
+if (!empty($exhibitionID))
+{
+    require_once('connectDB.php');
+
+    $sql = "SELECT * FROM exhibition NATURAL JOIN address WHERE id_exhibition = :exhibitionID";
+    $cmd = $conn->prepare($sql);
+    $cmd->bindParam(':exhibitionID', $exhibitionID, PDO::PARAM_INT);
+    $cmd->execute();
+    $exhibition= $cmd->fetch();
+    $conn = null;
+
+
+    $subject=$exhibition['subject'];
+    $description=$exhibition['description'];
+    $startDate=$exhibition['start_date'];
+    $endDate=$exhibition['end_date'];
+    $image = $exhibition['image'];
+    $country= $exhibition['country'];
+    $city= $exhibition['city'];
+    $street= $exhibition['street'];;
+    $homeNumber= $exhibition['home_number'];;
+    $flatNumber= $exhibition['flat_number'];
+    $postCode= $exhibition['post_code'];
+
+}
+?>
+
 <main class="container">
     <h1>Oraganize an exhibition</h1>
 
@@ -14,12 +64,14 @@ require_once('header.php');
         <div class="tab">
             <fieldset class="form-group">
                 <label for="subject" class="col-sm-2">Subject</label>
-                <input name="subject" id="subject" required placeholder="Subject" oninput="this.className = ''"/>
+                <input name="subject" id="subject" required placeholder="Subject" oninput="this.className = ''"
+                       value="<?php echo $subject?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="description" class="col-sm-2">Description</label>
-                <textarea rows="8" cols="50" name="description" placeholder="Enter description..." oninput="this.className = ''"></textarea>
+                <textarea rows="8" cols="50" name="description" placeholder="Enter description..." oninput="this.className = ''"
+                          style="text-align: left"><?php echo $description?></textarea>
             </fieldset>
         </div>
 
@@ -27,7 +79,7 @@ require_once('header.php');
         <div class="tab">
             <fieldset class="form-group">
                 <label for="files" class="col-sm-2">Select multiple files: </label>
-                <input id="files" type="file" multiple  name="images1[]" oninput="this.className = ''"/>
+                <input id="files" type="file" multiple  name="images1[]" oninput="this.className = ''" />
                 <output id="result" style="float: left"/><div id="artworkForm"></div>
             </fieldset>
         </div>
@@ -35,45 +87,47 @@ require_once('header.php');
         <div class="tab">
             <fieldset class="form-group">
                 <label for="startDate" class="col-sm-2">Start date</label>
-                <input type="date" name="startDate" id="startDate"oninput="this.className = ''"/>
+                <input type="date" name="startDate" id="startDate"oninput="this.className = ''" value="<?php echo $startDate?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="endDate" class="col-sm-2">End date</label>
-                <input type="date" name="endDate" id="endDate" oninput="this.className = ''"/>
+                <input type="date" name="endDate" id="endDate" oninput="this.className = ''" value="<?php echo $endDate?>"/>
             </fieldset>
 
             <!-- Address-->
 
             <fieldset class="form-group">
                 <label for="country" class="col-sm-2">Country</label>
-                <input type="country" name="country" id="country" oninput="this.className = ''"/>
+                <input type="country" name="country" id="country" oninput="this.className = ''" value="<?php echo $country?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="city" class="col-sm-2">City</label>
-                <input type="city" name="city" id="city" oninput="this.className = ''"/>
+                <input type="city" name="city" id="city" oninput="this.className = ''" value="<?php echo $city?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="street" class="col-sm-2">Street</label>
-                <input type="street" name="street" id="street" oninput="this.className = ''"/>
+                <input type="street" name="street" id="street" oninput="this.className = ''" value="<?php echo $street?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="homeNumber" class="col-sm-2">Home number</label>
-                <input type="homeNumber" name="homeNumber" id="homeNumber" oninput="this.className = ''"/>
+                <input type="homeNumber" name="homeNumber" id="homeNumber" oninput="this.className = ''" value="<?php echo $homeNumber?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="flatNumber" class="col-sm-2">Flat number</label>
-                <input type="flatNumber" name="flatNumber" id="flatNumber" oninput="this.className = ''"/>
+                <input type="flatNumber" name="flatNumber" id="flatNumber" oninput="this.className = ''"value="<?php echo $flatNumber?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="postCode" class="col-sm-2">Post code</label>
-                <input type="postCode" name="postCode" id="postCode" oninput="this.className = ''"/>
+                <input type="postCode" name="postCode" id="postCode" oninput="this.className = ''" value="<?php echo $postCode ?>"/>
             </fieldset>
+
+
 
 
         </div>

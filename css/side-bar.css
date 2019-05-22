@@ -1,15 +1,25 @@
 .container{
     padding-top: 30px;
+    margin-left: AUTO;
+    margin-right: auto ;
+    position:relative;
+    left: 6%;
+
+}
+.container1{
+    margin-left: 50%;
+
 }
 body {
     font-family: "Playfair Display", sans-serif;
     background-color: #e5e5e5;
     color: #080d30;
+
 }
 
 .sidebar {
     height: 100%;
-    width: 160px;
+    width: 13.5%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -38,17 +48,21 @@ body {
     color: #fff7b9;
     display: block;
 
+
 }
 
 .sidebar #adminSection a{
-    padding: 6px 8px ;
-    font-size: 16px;
-    color: #ffdaf0;
+    padding: 6px 8px 6px 16px;
+    font-size: 14px;
+    color: #333019;
     display: block;
+    font-weight: bold;
+    font-family: Consolas;
+    background-color: #b4aa5a;
 }
 
 .sidebar #adminSection a:hover {
-    color: #ffeefb;
+    color: #fff7b9;
     transition: 0.3s;
 }
 .main {

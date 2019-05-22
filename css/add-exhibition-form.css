@@ -1,6 +1,6 @@
 /* Style the form */
 #addExhibitionForm {
-    background-color: #ffffff;
+    background-color: #ededed;
     margin: 50px auto;
     padding: 40px;
     width: 100%;
@@ -31,7 +31,7 @@ input.invalid {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #bbbbbb;
+    background-color: #ededed;
     border: none;
     border-radius: 50%;
     display: inline-block;

@@ -88,6 +88,6 @@ $cmd->bindParam(':image', $fileName, PDO::PARAM_STR,255);
 $cmd->execute();
 $conn=null;
 
-// header('location:artworks.php');
+ header('location:artworks.php');
 
 ?>

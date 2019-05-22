@@ -4,8 +4,7 @@ require_once('header.php');
 ?>
 
 
-<main class="container">
-
+<main class="container" >
 
     <?php
 
