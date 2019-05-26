@@ -11,6 +11,8 @@ $street = $_POST['street'];
 $homeNumber = $_POST['homeNumber'];
 $flatNumber = $_POST['flatNumber'];
 $postCode = $_POST['postCode'];
+
+$ticketPrice=$_POST['price'];
 /*
 $imageName = $_FILES['image']['name'];
 $imageType = $_FILES['image']['type'];
@@ -93,8 +95,8 @@ $cmd->execute();
 $addressID = $conn->lastInsertId();
 
 
-$sql = "INSERT INTO exhibition (id_address, subject,description, start_date, end_date, image) VALUES 
-('$addressID',:subject,:description, :startDate, :endDate, :image)";
+$sql = "INSERT INTO exhibition (id_address, subject,description, start_date, end_date,ticket_price, image) VALUES 
+('$addressID',:subject,:description, :startDate, :endDate,:ticketPrice, :image)";
 
 $cmd = $conn->prepare($sql);
 
@@ -103,6 +105,7 @@ $cmd->bindParam(':subject', $subject, PDO::PARAM_STR, 45);
 $cmd->bindParam(':startDate', $startDate, PDO::PARAM_STR, 45);
 $cmd->bindParam(':endDate', $endDate, PDO::PARAM_STR, 45);
 $cmd->bindParam(':description', $description, PDO::PARAM_STR);
+$cmd->bindParam(':ticketPrice', $ticketPrice, PDO::PARAM_STR);
 $cmd->bindParam(':image', $imageName, PDO::PARAM_STR, 255);
 
 $cmd->execute();

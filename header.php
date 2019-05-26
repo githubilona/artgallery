@@ -43,7 +43,7 @@
         echo '<div id="userSection">
         <a href="addArtwork.php"><i class="far fa-circle"></i></i> Add Artwork</a>
         <a href="addExhibition.php"><i class="fas fa-circle"></i></i></i> Organize an exhibition</a>
-        <a href="#contact"><i class="fas fa-user-circle"></i></i></i> My account</a>
+        <a href="myAccount.php"><i class="fas fa-user-circle"></i></i></i> My account</a>
         <a href="logout.php"><i class="fas fa-power-off"></i></i> Logout</a>
         </div>';
 

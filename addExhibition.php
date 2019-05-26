@@ -7,50 +7,48 @@ require_once('header.php');
 
 
 <?php
-if (!empty($_GET['id_exhibition'])){
+if (!empty($_GET['id_exhibition'])) {
     $exhibitionID = $_GET['id_exhibition'];
-}
-else {
+} else {
     $exhibitionID = null;
 }
 //id_exhibition, id_address, subject, description, start_date, end_date, image
-$subject=null;
-$description=null;
-$startDate=null;
-$endDate=null;
+$subject = null;
+$description = null;
+$startDate = null;
+$endDate = null;
 $image = null;
-$country= null;
-$city= null;
-$street= null;
-$home_number= null;
-$flat_number= null;
-$post_code= null;
+$country = null;
+$city = null;
+$street = null;
+$homeNumber = null;
+$flatNumber = null;
+$postCode = null;
 
 // if the albumID exists, it is an edit situation and we need to
 //load the album from the DB
-if (!empty($exhibitionID))
-{
-    require_once('connectDB.php');
+if (!empty($exhibitionID)) {
+    require('connectDB.php');
 
     $sql = "SELECT * FROM exhibition NATURAL JOIN address WHERE id_exhibition = :exhibitionID";
     $cmd = $conn->prepare($sql);
     $cmd->bindParam(':exhibitionID', $exhibitionID, PDO::PARAM_INT);
     $cmd->execute();
-    $exhibition= $cmd->fetch();
+    $exhibition = $cmd->fetch();
     $conn = null;
 
 
-    $subject=$exhibition['subject'];
-    $description=$exhibition['description'];
-    $startDate=$exhibition['start_date'];
-    $endDate=$exhibition['end_date'];
+    $subject = $exhibition['subject'];
+    $description = $exhibition['description'];
+    $startDate = $exhibition['start_date'];
+    $endDate = $exhibition['end_date'];
     $image = $exhibition['image'];
-    $country= $exhibition['country'];
-    $city= $exhibition['city'];
-    $street= $exhibition['street'];;
-    $homeNumber= $exhibition['home_number'];;
-    $flatNumber= $exhibition['flat_number'];
-    $postCode= $exhibition['post_code'];
+    $country = $exhibition['country'];
+    $city = $exhibition['city'];
+    $street = $exhibition['street'];;
+    $homeNumber = $exhibition['home_number'];;
+    $flatNumber = $exhibition['flat_number'];
+    $postCode = $exhibition['post_code'];
 
 }
 ?>
@@ -58,20 +56,21 @@ if (!empty($exhibitionID))
 <main class="container">
     <h1>Oraganize an exhibition</h1>
 
-        <form method="post" action="addExhibitionAction.php" enctype="multipart/form-data" id="addExhibitionForm">
+    <form method="post" action="addExhibitionAction.php" enctype="multipart/form-data" id="addExhibitionForm">
 
         <!-- One "tab" for each step in the form: -->
         <div class="tab">
             <fieldset class="form-group">
                 <label for="subject" class="col-sm-2">Subject</label>
                 <input name="subject" id="subject" required placeholder="Subject" oninput="this.className = ''"
-                       value="<?php echo $subject?>"/>
+                       value="<?php echo $subject ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="description" class="col-sm-2">Description</label>
-                <textarea rows="8" cols="50" name="description" placeholder="Enter description..." oninput="this.className = ''"
-                          style="text-align: left"><?php echo $description?></textarea>
+                <textarea rows="8" cols="50" name="description" placeholder="Enter description..."
+                          oninput="this.className = ''"
+                          style="text-align: left"><?php echo $description ?></textarea>
             </fieldset>
         </div>
 
@@ -79,56 +78,97 @@ if (!empty($exhibitionID))
         <div class="tab">
             <fieldset class="form-group">
                 <label for="files" class="col-sm-2">Select multiple files: </label>
-                <input id="files" type="file" multiple  name="images1[]" oninput="this.className = ''" />
-                <output id="result" style="float: left"/><div id="artworkForm"></div>
+                <input id="files" type="file" multiple name="images1[]" oninput="this.className = ''"/>
+                <output id="result" style="float: left"/>
+                <div id="artworkForm"></div>
             </fieldset>
         </div>
 
         <div class="tab">
+
             <fieldset class="form-group">
                 <label for="startDate" class="col-sm-2">Start date</label>
-                <input type="date" name="startDate" id="startDate"oninput="this.className = ''" value="<?php echo $startDate?>"/>
+                <input type="date" name="startDate" id="startDate" oninput="this.className = ''"
+                       value="<?php echo $startDate ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="endDate" class="col-sm-2">End date</label>
-                <input type="date" name="endDate" id="endDate" oninput="this.className = ''" value="<?php echo $endDate?>"/>
+                <input type="date" name="endDate" id="endDate" oninput="this.className = ''"
+                       value="<?php echo $endDate ?>"/>
             </fieldset>
 
-            <!-- Address-->
 
             <fieldset class="form-group">
                 <label for="country" class="col-sm-2">Country</label>
-                <input type="country" name="country" id="country" oninput="this.className = ''" value="<?php echo $country?>"/>
+                <input name="country" id="country" oninput="this.className = ''" value="<?php echo $country ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="city" class="col-sm-2">City</label>
-                <input type="city" name="city" id="city" oninput="this.className = ''" value="<?php echo $city?>"/>
+                <input name="city" id="city" oninput="this.className = ''" value="<?php echo $city ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="street" class="col-sm-2">Street</label>
-                <input type="street" name="street" id="street" oninput="this.className = ''" value="<?php echo $street?>"/>
+                <input name="street" id="street" oninput="this.className = ''" value="<?php echo $street ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="homeNumber" class="col-sm-2">Home number</label>
-                <input type="homeNumber" name="homeNumber" id="homeNumber" oninput="this.className = ''" value="<?php echo $homeNumber?>"/>
+                <input name="homeNumber" id="homeNumber" oninput="this.className = ''"
+                       value="<?php echo $homeNumber ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="flatNumber" class="col-sm-2">Flat number</label>
-                <input type="flatNumber" name="flatNumber" id="flatNumber" oninput="this.className = ''"value="<?php echo $flatNumber?>"/>
+                <input name="flatNumber" id="flatNumber" oninput="this.className = ''"
+                       value="<?php echo $flatNumber ?>"/>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="postCode" class="col-sm-2">Post code</label>
-                <input type="postCode" name="postCode" id="postCode" oninput="this.className = ''" value="<?php echo $postCode ?>"/>
+                <input name="postCode" id="postCode" oninput="this.className = ''" value="<?php echo $postCode ?>"/>
             </fieldset>
 
+        </div>
+        <div class="tab">
+            <h4>Tickets</h4>
+            <fieldset class="form-group">
+                <label for="price" class="col-sm-2">Normal ticket price: </label>
+                <input type="number" name="price" id="price" oninput="this.className = ''" value="<?php echo $price ?>"
+                       onchange="showPrices()"/>
 
+                <div id="ticketPrices"> Discounts
+                    <?php
 
+                    echo '<table class="table table-striped table-hover">
+                            <tr><th>Type</th>
+                                <th>Discount</th>
+                                <th>Requirements</th>
+                                <th>Total</th>
+                               ';
+
+                    require('connectDB.php');
+
+                    $sql = "SELECT * FROM discount";
+                    $cmd = $conn->prepare($sql);
+                    $cmd->execute();
+                    $discounts = $cmd->fetchAll();
+                    $conn = null;
+
+                    echo '</tr>';
+                    foreach ($discounts as $discount) {
+                        echo '<tr><td>' . $discount['type'] . '</td>
+                      <td id="value">' . $discount['value'] . '</td>
+                      <td>' . $discount['requirements'] . '</td>
+                      <td id="total" style="color:green; font-weight: bold" >' . 'Enter a ticket price' . '</td>
+                     ';
+                    }
+                    echo '</table>';
+                    ?>
+                </div>
+            </fieldset>
 
         </div>
 
@@ -139,6 +179,7 @@ if (!empty($exhibitionID))
                 <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
             </div>
         </div>
+
 
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">
@@ -191,8 +232,8 @@ if (!empty($exhibitionID))
                         output.insertBefore(div, null);
 
                         // TODO add form for each image
-                   //     output.insertBefore(div2, null);
-                   //     document.getElementById("artworkResult").appendChild(div2);
+                        //     output.insertBefore(div2, null);
+                        //     document.getElementById("artworkResult").appendChild(div2);
 
 
                     });
@@ -206,14 +247,6 @@ if (!empty($exhibitionID))
             console.log("Your browser does not support File API");
         }
     }
-
-
-
-
-
-
-
-
 
 
     var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -288,7 +321,38 @@ if (!empty($exhibitionID))
         //... and adds the "active" class to the current step:
         x[n].className += " active";
     }
+
+
 </script>
+<script>
+    function showPrices() {
+
+        var inputPrice = document.getElementById("price");
+        var value = parseFloat(document.getElementById("value").textContent);
+        var normalPrice = parseFloat(inputPrice.value).toFixed(2);
+        var studentPrice = (normalPrice * value).toFixed(2);
+        var kidPrice = (normalPrice * value).toFixed(2);
+        var seniorPrice = (normalPrice * 0.6).toFixed(2);
 
 
+        var div = document.getElementById("total");
+        div.innerHTML =
+            "Normal price " + normalPrice + "</br>" +
+            "Student 40%" + studentPrice + "</br>" +
+            "Kid 50%" + kidPrice + "</br>" +
+            "60+ Senior  60%" + seniorPrice;
+        var td = document.getElementsByTagName("td");
+        var tdValue = '';
+        for (var i = 0; i < td.length; i++) {
+            if (td[i].id == "value") {
+                tdValue = ((1.00 - parseFloat(td[i].textContent)) * normalPrice).toFixed(2);
+            }
+            if (td[i].id == "total") {
+                td[i].innerHTML = tdValue;
+            }
+
+        }
+
+    }
+</script>
 

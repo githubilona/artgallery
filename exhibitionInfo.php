@@ -33,7 +33,7 @@ require_once('header.php');
 
     ?>
     <button class="tablink" onclick="openPage('information', this, '#b4aa5a')" id="defaultOpen">Information</button>
-    <button class="tablink" onclick="openPage('author', this, '#b4aa5a')" >Author</button>
+    <button class="tablink" onclick="openPage('author', this, '#b4aa5a')">Author</button>
     <button class="tablink" onclick="openPage('ticket', this, '#b4aa5a')">Tickets</button>
     <button class="tablink" onclick="openPage('about', this, '#CFB53B')">About</button>
 
@@ -108,46 +108,59 @@ require_once('header.php');
 
     <div id="ticket" class="tabcontent">
         <h3>Buy a ticket </h3>
-        <p>Get in touch, or swing by for a cup of coffee.</p>
-        <!--
-            Z tabeli ticket wybrac cewny biletow dla roznych fgrup osob dla ogladanej wystawy
-            Rodzaj biletu i cena ma myc wyswyeitlonaw dropdown list, z posrod eartosci uzywtkownik wybiera rodzaj bietów i ilosc
-            Podawana jest cena calego zamówienia. Dodatkowo w tej zakladce bedzee umieszczony formularz do wpisania dacnych
-            kupiujacego bielty- imie, nazwisko (nick, gdy uzytkownk zalogowany, w przeciwnym raszie w tym pppoolu umieszconey null)
-         -->
 
-        <form method="post" action="ticketAction.php" enctype="multipart/form-data">
+        <?php
+        $link = "ticketAction.php?id_exhibition=$id_exhibition";
+        if (empty($_SESSION['email'])) {
+            echo '<p>To buy a ticket you have to be logged in</p>';
+            echo '<a href="login.php"><i class="fas fa-key"></i></i> Login</a>';
+            echo '<p> Don\'t have an account? Register </p>';
+            echo '<a href="registration.php"><i class="fas fa-user-plus"></i></i> Register</a>';
 
-            <?php
-            $sql = "SELECT * FROM ticket WHERE id_exhibition=:id_exhibition";
+
+        } else {
+            echo '
+        <form method="post" action="' . $link . ' " enctype="multipart/form-data">
+
+            <fieldset class="form-group">
+                <label for="ticketType" class="col-sm-2">Ticket type</label>';
+
+            $sql = "SELECT * FROM discount";
             $cmd = $conn->prepare($sql);
-            $cmd->bindParam(':id_exhibition', $id_exhibition, PDO::PARAM_INT);
             $cmd->execute();
-            $tickets = $cmd->fetchAll();
-
+            $discounts = $cmd->fetchAll();
             echo '<select name="selectTicket">';
-            foreach ($tickets as $ticket) {
-                echo '<option value="'.$ticket['id_ticket'].'">' . $ticket['price'] . '   ' . $ticket['type'] . '</option> ';
+            foreach ($discounts as $discount) {
+                echo '<option value="' . $discount['id_discount'] . '">' . $exhibition['ticket_price'] * (1 - $discount['value']) . '   ' . $discount['type'] . '</option> ';
             }
             echo ' </select><br>';
+            echo '   
+            </fieldset>
 
-            echo ' 
-                     Firstname:<input type="text" name="firstName"> <br>
-                     Lastname:<input type="text" name="lastName"> <br>
-                    
-                
-                ';
-            if (empty($_SESSION['email'])) {
-                echo 'email:<input type="text" name="email"> <br>';
-                      // TODO TODO TODO Login to reserve a ticket';
-            }else{
-                echo 'email:<input type="hidden" name="email" > <br>';
-            }
-            ?>
-            <input type="submit">
-        </form>
+            <fieldset class="form-group">
+                <label for="quantity" class="col-sm-2">Quantity</label>
+                <input type="number" name="quantity" id="quantity" required placeholder="Quantity" />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="firstName" class="col-sm-2">First Name</label>
+                <input name="firstName" id="firstName" required placeholder="First Name" />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="lastName" class="col-sm-2">Last Name</label>
+                <input name="lastName" id="lastName" required placeholder="Last Name"/>
+            </fieldset> 
+            
+             <fieldset class="form-group">
+                 <button onclick="showAlert()" >Buy</button>
+            </fieldset> 
+
+        </form>';
 
 
+        }
+        ?>
     </div>
 
     <div id="about" class="tabcontent">
@@ -159,9 +172,14 @@ require_once('header.php');
     <?php $conn = null;
     ?>
 
-
 </main>
 <?php require_once('footer.php'); ?>
+
+<script>
+    function showAlert() {
+        alert("Thank you for your reservation! ");
+    }
+</script>
 <script>
     var slideIndex = 1;
     showSlides(slideIndex);
