@@ -37,6 +37,7 @@
                     <a href="users.php"><i class="fas fa-circle"></i></i>Users</a>
                     <a href="adminArtworks.php"><i class="far fa-circle"></i></i>Artworks</a>
                     <a href="adminExhibitions.php"><i class="fas fa-circle"></i></i>Exhibitions</a>
+                    <a href="adminTickets.php"><i class="fas fa-circle"></i></i>Tickets</a>
                   </div>';
         }
 

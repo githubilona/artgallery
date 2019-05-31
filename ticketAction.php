@@ -30,14 +30,16 @@ $cmd = $conn->prepare($sqlPrice);
 $cmd->execute();
 $exhibition = $cmd->fetch();
 $ticketPrice=$exhibition['ticket_price'];
+$discountTicketPrice=$ticketPrice * $discount['value'];
 $sum = (1 - $discount['value']) * $ticketPrice * $quantity;
 
 
-$sqlReservation = "INSERT INTO ticket_reservation (id_discount,ticket_price, quantity, id_user, first_name, last_name, sum)
-                    VALUES (:selectTicket,:ticket_price, :quantity, :id_user ,:firstName, :lastName, $sum )";
+$sqlReservation = "INSERT INTO ticket_reservation (id_exhibition, id_discount,ticket_price, discount_ticket_price, quantity, id_user, first_name, last_name, sum)
+                    VALUES ($id_exhibition,:selectTicket,:ticket_price,:discount_ticket_price, :quantity, :id_user ,:firstName, :lastName, $sum )";
 $cmd = $conn->prepare($sqlReservation);
 $cmd->bindParam(':selectTicket', $selectTicket, PDO::PARAM_STR, 45);
 $cmd->bindParam(':ticket_price', $ticketPrice, PDO::PARAM_STR, 45);
+$cmd->bindParam(':discount_ticket_price', $discountTicketPrice, PDO::PARAM_STR, 45);
 $cmd->bindParam(':quantity', $quantity, PDO::PARAM_INT, 45);
 $cmd->bindParam(':id_user', $userID, PDO::PARAM_INT, 45);
 $cmd->bindParam(':firstName', $firstName, PDO::PARAM_STR, 45);

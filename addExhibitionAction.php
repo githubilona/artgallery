@@ -13,6 +13,8 @@ $flatNumber = $_POST['flatNumber'];
 $postCode = $_POST['postCode'];
 
 $ticketPrice=$_POST['price'];
+session_start();
+$userID=$_SESSION['id_user'];
 /*
 $imageName = $_FILES['image']['name'];
 $imageType = $_FILES['image']['type'];
@@ -95,8 +97,8 @@ $cmd->execute();
 $addressID = $conn->lastInsertId();
 
 
-$sql = "INSERT INTO exhibition (id_address, subject,description, start_date, end_date,ticket_price, image) VALUES 
-('$addressID',:subject,:description, :startDate, :endDate,:ticketPrice, :image)";
+$sql = "INSERT INTO exhibition (id_address,id_user, subject,description, start_date, end_date,ticket_price, image) VALUES 
+('$addressID','$userID',:subject,:description, :startDate, :endDate,:ticketPrice, :image)";
 
 $cmd = $conn->prepare($sql);
 
@@ -130,10 +132,6 @@ for ($x = 0; $x < count($_FILES['images1']['tmp_name']); $x++) {
         move_uploaded_file($sumber, $imageName);
 
         $sql = "insert into exhibition_images (id_exhibition, image) values ('$exhibitionID','$imageName')";
-
-        $sql2="INSERT INTO artwork (id_artist, id_exhibition, title, date_made, technique, colors, width, height, description, image) VALUES 
-(null,'$exhibitionID',null , null, null, null, null, null, null, '$imageName')";
-
         $cmd = $conn->prepare($sql);
         $cmd->execute();
         // $artists =$cmd->fetchAll();

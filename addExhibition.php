@@ -54,7 +54,14 @@ if (!empty($exhibitionID)) {
 ?>
 
 <main class="container">
-    <h1>Oraganize an exhibition</h1>
+    <?php
+    if (empty($_GET['id_exhibition'])){
+        echo ' <h1>Oraganize an exhibition</h1>';
+    }else{
+        echo ' <h1>Edit</h1>';
+    }
+
+    ?>
 
     <form method="post" action="addExhibitionAction.php" enctype="multipart/form-data" id="addExhibitionForm">
 

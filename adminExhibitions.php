@@ -11,7 +11,21 @@ require_once ('header.php');
     require_once ('connectDB.php');
 
     //Step 2 - build the sql command
-    $sql = "SELECT * FROM exhibition NATURAL JOIN address";
+    $sql = "
+SELECT e.id_exhibition, e.subject, e.description, e.start_date, e.end_date,image, a.city, a.street, a.home_number, COUNT(*) as sold_tickets
+	FROM ticket_reservation t
+	left join exhibition e on e.id_exhibition=t.id_exhibition
+	left join address a on e.id_address=a.id_address
+	group by e.id_exhibition
+UNION
+SELECT   e.id_exhibition, e.subject, e.description, e.start_date, e.end_date,image, a.city, a.street, a.home_number, 0 as sold_tickets 
+	FROM exhibition e  left join address a on e.id_address=a.id_address join  ticket_reservation t
+	where e.id_exhibition not in (SELECT e.id_exhibition
+		FROM ticket_reservation t
+		left join exhibition e on e.id_exhibition=t.id_exhibition
+		left join address a on e.id_address=a.id_address
+		group by e.id_exhibition)
+group by e.id_exhibition;      ";
 
   //id_exhibition, id_address, subject, description, start_date, end_date, image
     //Step 3 - bind the parameters and execute
@@ -28,6 +42,7 @@ require_once ('header.php');
                 <th>Address</th>
                 <th>Start_date</th>
                 <th>End date</th>
+                <th>Number of sold tickets</th>
                 <th>Image</th>
          ';
 
@@ -47,6 +62,7 @@ require_once ('header.php');
                       <td>'.$exhibition['city']. ' '.$exhibition['street'].' '.$exhibition['home_number']. '</td>
                       <td>'.$exhibition['start_date'].'</td>
                       <td>'.$exhibition['end_date'].'</td>
+                      <td>'.$exhibition['sold_tickets'].'</td>
                       <td><a href="exhibitionInfo.php?id_exhibition='.$exhibition['id_exhibition'].'"><img height="50" src='.$exhibition['image'].'></a></td>
                      ';
 
@@ -54,7 +70,7 @@ require_once ('header.php');
         if (!empty($_SESSION['email'])){
             echo '<td><a href="addExhibition.php?id_exhibition='.$exhibition['id_exhibition'].'">
                             <i class="fas fa-edit" style="font-size: 30px"></i></a></td>
-                      <td "><a href="deleteExhibition.php?id_exhibition='.$exhibition['id_exhibition'].'" >
+                      <td "><a href="deleteExhibition.php?id_exhibition='.$exhibition['id_exhibition'].'" class="confirmation">
                       <i class="fas fa-trash-alt" style="font-size: 30px"></i></a></td>';
         }
         echo '</tr>';

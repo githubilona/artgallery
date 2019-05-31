@@ -62,8 +62,8 @@ require_once ('header.php');
         if (!empty($_SESSION['email'])){
             echo '<td><a href="addArtwork.php?id_artwork='.$artwork['id_artwork'].'">
                                  <i class="fas fa-edit" style="font-size: 30px"></i></a></td>
-                      <td><a href="deleteArtwork.php?id_artwork='.$artwork['id_artwork'].'">
-                                     <i class="fas fa-trash-alt" style="font-size: 30px"></i></a></td>';
+                      <td><a href="deleteArtwork.php?id_artwork='.$artwork['id_artwork'].'" class="confirmation">
+                                     <i class="fas fa-trash-alt" style="font-size: 30px;"></i></a></td>';
         }
         echo '</tr>';
     }
@@ -75,7 +75,3 @@ require_once ('header.php');
     ?>
 </main>
 <?php require_once ('footer.php');?>
-<script src="path/to/jquery.js"></script>
-<script src="path/to/popper.js"></script>
-<script src="path/to/bootstrap.js"></script>
-<script src="path/to/bootstrap-confirmation.js"></script>

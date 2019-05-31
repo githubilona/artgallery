@@ -10,72 +10,54 @@ require_once ('header.php');
     //Step 1 - connect to the DB
     require_once ('connectDB.php');
 
-    //Step 2 - build the sql command
-    $sql = "SELECT * FROM artwork NATURAL JOIN artist";
+
+    $sql = "   
+    select distinct e.subject, u.email, t.first_name, t.last_name, d.type, e.ticket_price, t.discount_ticket_price, t.quantity, d.value, t.sum, e.id_exhibition
+    from user u
+    left join ticket_reservation t  on u.id_user=t.id_user 
+    left join exhibition e on e.id_exhibition=t.id_exhibition 
+    left join discount d on d.id_discount=t.id_discount
+    group by t.id_ticket_reservation, d.id_discount order by username;
+     ";
 
 
-    //Step 3 - bind the parameters and execute
     $cmd = $conn->prepare($sql);
     $cmd->execute();
-    $artworks = $cmd->fetchAll();
+    $reservations = $cmd->fetchAll();
 
-    //create a table and display the results
+
     echo '<table class="table table-striped table-hover">
-            <tr><th>artworkID/th>
-                <th>artist</th>
-                <th>exhibitionID</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Year made</th>
-                <th>Technique</th>
-                <th>Colors</th>
-                <th>Width</th>
-                <th>Height</th>
-                <th>Description</th>
-                <th>Image</th>
-         ';
-
-    if (!empty($_SESSION['email'])){
-        echo '<th>Edit</th>
-                  <th>Delete</th>';
-    }
+                            <tr>
+                                <th>User</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Exhibition</th>
+                                <th>Quantity</th>
+                                <th>Normal ticket price</th>
+                                <th>Discount ticket price</th>
+                                <th>Ticket type</th>
+                                <th>Discount value</th>
+                                <th>Sum</th>
+                               ';
 
     echo '</tr>';
-
-    foreach($artworks as $artwork)
-    {
-        echo '<tr><td>'.$artwork['id_artwork'].'</td>
-                      <td><a href="artistInfo.php?id_artist='.$artwork['id_artist'].'">'.$artwork['first_name'].' '. $artwork['last_name'].'</a></td>
-                      <td>'.$artwork['id_exhibition'].'</td>
-                      <td><a href="artworkInfo.php?id_artwork='.$artwork['id_artwork'].'">'.$artwork['title'].'</a></td>
-                      <td>'.$artwork['price'].'</td>
-                      <td>'.$artwork['date_made'].'</td>
-                      <td>'.$artwork['technique'].'</td>
-                      <td>'.$artwork['colors'].'</td>
-                      <td>'.$artwork['width'].'</td>
-                      <td>'.$artwork['height'].'</td>
-                      <td>'.$artwork['description'].'</td>
-                      <td><a href="artworkInfo.php?id_artwork='.$artwork['id_artwork'].'"><img height="50" src='.$artwork['image'].'></a></td>
-                     ';
-
-        //only show the edit and delete links if these are valid, logged in users
-        if (!empty($_SESSION['email'])){
-            echo '<td><a href="addArtwork.php?id_artwork='.$artwork['id_artwork'].'">
-                                 <i class="fas fa-edit" style="font-size: 30px"></i></a></td>
-                      <td><a href="deleteArtwork.php?id_artwork='.$artwork['id_artwork'].'">
-                                     <i class="fas fa-trash-alt" style="font-size: 30px"></i></a></td>';
-        }
-        echo '</tr>';
+    foreach ($reservations as $reservation) {
+        echo '<tr>
+                      <td >' . $reservation['email'] . '</td>
+                      <td>' . $reservation['first_name'] . '</td>
+                      <td>' . $reservation['last_name'] . '</td>
+                      <td><a href="exhibitionInfo.php?id_exhibition=' . $reservation['id_exhibition'] . '">  ' . $reservation['subject'] . '</a></td>
+                      <td>' . $reservation['quantity'] . '</td>
+                      <td>' . $reservation['ticket_price'] . '</td>
+                      <td>' . $reservation['discount_ticket_price'] . '</td>
+                      <td>' . $reservation['type'] . '</td>
+                      <td>' . $reservation['value'] . '</td>
+                      <td  style="color:firebrick; font-weight: bold">' . $reservation['sum'] . '</td>
+               </tr>';
     }
+    echo '</table>';
 
-    echo '</table></main>';
-
-
-
+    $conn=null;
     ?>
 </main>
 <?php require_once ('footer.php');?>
-<script src="path/to/jquery.js"></script>
-<script src="path/to/popper.js"></script>
-<script src="path/to/bootstrap.js"></script>
-<script src="path/to/bootstrap-confirmation.js"></script>

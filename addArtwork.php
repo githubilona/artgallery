@@ -57,7 +57,15 @@ if (!empty($artworkID))
 ?>
 <link rel="stylesheet" href="css/add-artwork.css">
 <div class="container">
-    <h1>Add artwork</h1>
+    <?php
+    if (empty($_GET['id_exhibition'])){
+        echo ' <h1>Oraganize an exhibition</h1>';
+    }else{
+        echo ' <h1>Edit</h1>';
+    }
+
+    ?>
+
 <div  id="form">
     <!-- To have file input send properly I had to add enctype="multipart/form-data" 01.05.19 -->
     <form method="post" action="addArtworkAction.php" enctype="multipart/form-data">

@@ -57,6 +57,18 @@ require_once('header.php');
                     <?php echo $address['post_code']; ?><br>
                     <?php echo $address['country']; ?>  </p>
             </div>
+            <div id="visitors">
+                <p><b>Number of Visitors: </b><br>
+                <?php
+                $sql = " SELECT COUNT(*) as visitors FROM ticket_reservation WHERE id_exhibition=:id_exhibition";
+                $cmd = $conn->prepare($sql);
+                $cmd->bindParam(':id_exhibition', $id_exhibition, PDO::PARAM_INT);
+                $cmd->execute();
+                $visitors = $cmd->fetch();
+                   echo  $visitors['visitors'];
+                ?>
+                </p>
+            </div>
         </div>
 
 
@@ -129,7 +141,10 @@ require_once('header.php');
             $cmd = $conn->prepare($sql);
             $cmd->execute();
             $discounts = $cmd->fetchAll();
-            echo '<select name="selectTicket">';
+
+            echo '
+            
+            <select name="selectTicket">';
             foreach ($discounts as $discount) {
                 echo '<option value="' . $discount['id_discount'] . '">' . $exhibition['ticket_price'] * (1 - $discount['value']) . '   ' . $discount['type'] . '</option> ';
             }
@@ -139,8 +154,9 @@ require_once('header.php');
 
             <fieldset class="form-group">
                 <label for="quantity" class="col-sm-2">Quantity</label>
-                <input type="number" name="quantity" id="quantity" required placeholder="Quantity" />
+                <input type="number" name="quantity" id="quantity" required placeholder="Quantity" onchange="createDiv()"/>
             </fieldset>
+            
 
             <fieldset class="form-group">
                 <label for="firstName" class="col-sm-2">First Name</label>
@@ -174,7 +190,25 @@ require_once('header.php');
 
 </main>
 <?php require_once('footer.php'); ?>
-
+<style>
+    .ticketDiv{
+        background-color: #4cae4c;
+    }
+</style>
+<script>
+    function createDiv(){
+        var quantity=document.getElementsByName("quantity").value;
+        for (var i = 0; i < quantity; i++){
+            var new_div = document.createElement("div");
+            new_div.className = "ticketDiv";
+            document.body.appendChild(new_div);
+            var divv= document.getElementsByName("quantity");
+            divv.innerHTML=("HELLO HELLOHELLO HELLOHELLO HELLOHELLO HELLOHELLO HELLOHELLO HELLO");
+            new_div.innerHTML="qwertyuiopasdfghjnkjnjnjnjh";
+            console.log("This is repeat " + i);
+        }
+    }
+</script>
 <script>
     function showAlert() {
         alert("Thank you for your reservation! ");

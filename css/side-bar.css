@@ -10,6 +10,20 @@
     margin-left: 50%;
 
 }
+.container a{
+    text-decoration: none;
+    font-weight: bold;
+
+    color: #b4aa5a;
+}
+.container a:hover {
+    color: #000000;
+    transition: 0.3s;
+}
+
+.table td, th {
+    text-align: center;
+}
 body {
     font-family: "Playfair Display", sans-serif;
     background-color: #e5e5e5;
