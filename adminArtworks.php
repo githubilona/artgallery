@@ -4,6 +4,12 @@ require_once ('header.php');
 ?>
 
 <main class="container">
+    <h4>
+        <b>Admin panel</b><br>
+    </h4>
+    <h5>
+        Artworks
+    </h5>
     <?php
 
 
@@ -21,7 +27,7 @@ require_once ('header.php');
 
     //create a table and display the results
     echo '<table class="table table-striped table-hover">
-            <tr><th>artworkID/th>
+            <tr><th>artworkID</th>
                 <th>artist</th>
                 <th>exhibitionID</th>
                 <th>Title</th>

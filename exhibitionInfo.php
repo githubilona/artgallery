@@ -9,7 +9,7 @@ require_once('header.php');
     <?php
     $id_exhibition = $_GET['id_exhibition'];
     require_once('connectDB.php');
-    $sql = "SELECT * FROM exhibition WHERE id_exhibition=:id_exhibition";
+    $sql = "SELECT * FROM exhibition natural join user WHERE id_exhibition=:id_exhibition ";
     $cmd = $conn->prepare($sql);
     $cmd->bindParam(':id_exhibition', $id_exhibition, PDO::PARAM_INT);
     $cmd->execute();
@@ -33,16 +33,21 @@ require_once('header.php');
 
     ?>
     <button class="tablink" onclick="openPage('information', this, '#b4aa5a')" id="defaultOpen">Information</button>
-    <button class="tablink" onclick="openPage('author', this, '#b4aa5a')">Author</button>
     <button class="tablink" onclick="openPage('ticket', this, '#b4aa5a')">Tickets</button>
-    <button class="tablink" onclick="openPage('about', this, '#CFB53B')">About</button>
+    <!-- <button class="tablink" onclick="openPage('author', this, '#b4aa5a')">Author</button>
+       <button class="tablink" onclick="openPage('about', this, '#CFB53B')">About</button> -->
+
+
 
     <div id="information" class="tabcontent">
-        <div class="split left">
+        <div class="split left" style="padding: 30px">
             <div id="title">
                 <?php echo '<h2>' . $exhibition['subject'] . '</h2>'; ?>
             </div>
-            <div id="description">
+            <div id="author">
+                <?php echo '<h4>' . $exhibition['username'] . '</h4>'; ?>
+            </div>
+            <div id="description" style="padding: 30px 0px 10px 0px">
                 <p> <?php echo $exhibition['description']; ?> </p>
             </div>
             <div id="address">
@@ -110,14 +115,14 @@ require_once('header.php');
 
 
     </div>
-
+<!--
     <div id="author" class="tabcontent">
         <h3>Author</h3>
         <p>Some news this fine day!</p>
 
         <h1>dfnhkhuerf hekrf werf hhefb 3uwkfn3wkfn3blkfhn3wbklhfn kf 3w3 b3 wt3b o</h1>
     </div>
-
+-->
     <div id="ticket" class="tabcontent">
         <h3>Buy a ticket </h3>
 

@@ -6,7 +6,7 @@ require_once('header.php');
     <h1>Exhibitions</h1>
     <?php
     require_once('connectDB.php');
-    $sql = "SELECT * FROM exhibition";
+    $sql = "SELECT id_exhibition,subject, description, ticket_price, start_date, end_date,image, username FROM exhibition natural join user;";
     $cmd = $conn->prepare($sql);
     $cmd->execute();
     $exhibitions = $cmd->fetchAll();
@@ -18,9 +18,12 @@ require_once('header.php');
                     <div class="infoExhibition">
                         <h2><a href="exhibitionInfo.php?id_exhibition='.$exhibition['id_exhibition'].'">'
                         . $exhibition['subject'] . '</a></h2>
-                        <p class="title">CEO & Founder</p>
+                        <p class="title">' . $exhibition['username'] . '</p>
                         <p>' . $exhibition['description'] . '</p>
-                        <p>' . $exhibition['start_date'] . '   ' . $exhibition['end_date'] . '</p>
+                        <p style="float:left; margin-right:50px"><b>Start date: &nbsp</b>' . $exhibition['start_date'] .
+                        '<br><b>End date: &nbsp</b>   ' . $exhibition['end_date'] . '</p>
+                        <p><b> Normal ticket price:</b> &nbsp' .$exhibition['ticket_price'].'</p>
+                        
                     </div>
                 </div>
             </div> ';

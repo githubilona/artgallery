@@ -3,6 +3,12 @@ $pageTitle='Manage users';
 require_once ('header.php');
 ?>
 <main class="container">
+    <h4>
+        <b>Admin panel</b><br>
+    </h4>
+    <h5>
+        Users
+    </h5><br><hr style="background-color: #0f0f0f">
 <?php
 
 
@@ -26,8 +32,7 @@ echo '<table class="table table-striped table-hover">
          ';
 
 if (!empty($_SESSION['email'])){
-    echo '<th>Edit</th>
-                  <th>Delete</th>';
+    echo '  <th>Delete</th>';
 }
 
 echo '</tr>';
@@ -42,10 +47,9 @@ foreach($users as $user)
 
     //only show the edit and delete links if these are valid, logged in users
     if (!empty($_SESSION['email'])){
-        echo '<td><a href="userInfo.php?albumID='.$user['id_user'].'"
-                                class="btn btn-primary">Edit</a></td>
-                      <td><a href="deleteUser.php?id_user='.$user['id_user'].'" 
-                                class="btn btn-danger confirmation">Delete</a></td>';
+        echo '
+                      <td><a href="deleteUser.php?id_user='.$user['id_user'].'" class="confirmation">
+                      <i class="fas fa-trash-alt" style="font-size: 30px"></i></a></td>';
     }
     echo '</tr>';
 }

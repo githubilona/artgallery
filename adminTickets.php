@@ -4,6 +4,12 @@ require_once ('header.php');
 ?>
 
 <main class="container">
+    <h4>
+        <b>Admin panel</b><br>
+    </h4>
+    <h5>
+        Ticket Reservations
+    </h5>
     <?php
 
 

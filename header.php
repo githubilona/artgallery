@@ -34,7 +34,7 @@
         $adminEmail='admin@admin.pl';
         if($_SESSION['email'] == $adminEmail ){
             echo '<div id="adminSection">
-                    <a href="users.php"><i class="fas fa-circle"></i></i>Users</a>
+                    <a href="adminUsers.php"><i class="fas fa-circle"></i></i>Users</a>
                     <a href="adminArtworks.php"><i class="far fa-circle"></i></i>Artworks</a>
                     <a href="adminExhibitions.php"><i class="fas fa-circle"></i></i>Exhibitions</a>
                     <a href="adminTickets.php"><i class="fas fa-circle"></i></i>Tickets</a>

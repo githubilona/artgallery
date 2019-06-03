@@ -1,9 +1,10 @@
+
+<footer style="margin-top: 200px">
+
+
+</footer>
 </body>
 
-<footer class="navbar-fixed-bottom ">
-    <hr />
-    &copy; 2019 | Art Gallery
-</footer>
 <!-- Latest jQuery -->
 <script src="js/jquery-3.2.1.min.js"></script>
 

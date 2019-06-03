@@ -3,7 +3,7 @@ $pageTitle = 'My account';
 require_once('header.php');
 ?>
 
-<link rel="stylesheet" href="css/exhibition-info-tabs.css">
+<link rel="stylesheet" href="css/myaccount-tabs.css">
 <main class="container" onload="openPage('information', this, 'green')">
 
     <?php
@@ -26,7 +26,7 @@ require_once('header.php');
     <button class="tablink" onclick="openPage('information', this, '#b4aa5a')" id="defaultOpen">Account Information</button>
     <button class="tablink" onclick="openPage('author', this, '#b4aa5a')">My exhibitions</button>
     <button class="tablink" onclick="openPage('ticket', this, '#b4aa5a')">Tickets</button>
-    <button class="tablink" onclick="openPage('about', this, '#b4aa5a')">About</button>
+   <!-- <button class="tablink" onclick="openPage('about', this, '#b4aa5a')">About</button> -->
 
     <div id="information" class="tabcontent">
         <div class="split left">
