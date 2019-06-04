@@ -29,7 +29,6 @@ require_once ('header.php');
     echo '<table class="table table-striped table-hover">
             <tr><th>artworkID</th>
                 <th>artist</th>
-                <th>exhibitionID</th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Year made</th>
@@ -52,7 +51,6 @@ require_once ('header.php');
     {
         echo '<tr><td>'.$artwork['id_artwork'].'</td>
                       <td><a href="artistInfo.php?id_artist='.$artwork['id_artist'].'">'.$artwork['first_name'].' '. $artwork['last_name'].'</a></td>
-                      <td>'.$artwork['id_exhibition'].'</td>
                       <td><a href="artworkInfo.php?id_artwork='.$artwork['id_artwork'].'">'.$artwork['title'].'</a></td>
                       <td>'.$artwork['price'].'</td>
                       <td>'.$artwork['date_made'].'</td>

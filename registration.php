@@ -23,7 +23,7 @@ require_once('header.php');
             <input name="username" id="username" placeholder="your name"/>
         </fieldset>
 
-        // TODO change password pattern
+        <!--//  password pattern -->
 
         <fieldset class="form-group">
             <label for="password" class="col-sm-2">Password: </label>
